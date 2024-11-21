@@ -1,0 +1,11 @@
+Commands
+
+dotnet run - ne API // runs the project
+dotnet tool install --global dotnet-ef --version 7.0.10 
+dotnet ef migrations add InitialCreate -s API -p Persistence
+dotnet ef database update
+
+
+Packages: 
+Microsoft.EntityFrameworkCore.Design ne API
+Microsoft.EntityFrameworkCore.SQLite ne Persistence
