@@ -5,11 +5,12 @@ using Domain;
 		{
 		public class Seed
 		{
-		public static async Task SeedData(DataContext context)
+		public static async Task SeedData(DataContext context) //  with a static method we can use without creating a new instance of the seed class.
 		{
-		if (context.Products.Any()) return;
+		if (context.Products.Any()) return; //  is going to check in our database to see if we already have products inside
 		
-
+		// If we do, we do not want to seed more products inside it.
+		// If we do not have any activities, then we're going to create a new list of products and there's a
 		var products = new List<Product>
 		{
 		new Product
@@ -37,8 +38,8 @@ using Domain;
 		};
 		
 
-		await context.Products.AddRangeAsync(products);
-		await context.SaveChangesAsync();
+		await context.Products.AddRangeAsync(products); // saves into memory
+		await context.SaveChangesAsync(); // saves into database
 		}
 		}
 		}

@@ -9,3 +9,55 @@ dotnet ef database update
 Packages: 
 Microsoft.EntityFrameworkCore.Design ne API
 Microsoft.EntityFrameworkCore.SQLite ne Persistence
+
+We use Entity Framework to stimulate the database
+
+11 - EntityFramework translates our code to sql command that update our tables in the database, when using entity framework we need to create
+a class named DbContext, which acts as a bridge between the domain and database 
+Migrations to create the database from the code
+PostMan & Insomnia to test if the APIs are working
+
+Our Layers are Hexagonal, Clean Archirtecture 
+    1. Domain - (Center) Entities / clasess/ foundation
+    2. Application - depended on Domain & Persistence contains the Logic
+    3. API - Dependency on the Application, recives and return the http requests, communaicates with the front end
+    4. Persistence - depended on Domain, the connection to the dtatabase
+    5. Presentation Layer - The Front End
+
+To not charge the API Layer with directly querying the database
+We want the application layer to do that
+So we add the Persistence Layer which along side with the Apllication act as the Use Cases
+
+
+Two Patterns
+    CQRS commsnd and query seperations
+Command does something, it modifies a state, does not return a value
+Querys awnser a quesqion should return a result
+Commands called from the api use the domain and persistence layer to modify the database
+The querys are only concerned with retriving data from the database
+It is hard to find the benefits because we only have one database if we had one for read and
+one for writinf it could make the application seriosly faster, because both databases didnt
+need to be used.
+
+Mediator Pattern - Our API Controllers use a mediator.send function to pass an object
+to the mediator handler which will process some logic and send out an object
+So the API controllers are aware that it has been succesful it will return a mediator 
+object called unit and then the controller shows a 200ok response
+
+9 - How the application runs - in the program.cs .net runs the main method which calls
+the method createHostBuilder which uses the createDefaultBuilder which has some
+pre-configured deafults like setting the content root path (where to get the files thata re part of the project)
+It is going to load our configuration some of the ways it does that is through appsettings.development.json
+It sets up ILoggging and return the initilized Host Builder.
+This createHostBuilder method also tells us to use the StartUp class
+In the startup class the configuation gets injected
+In the appsetting.developent.json the default logging level is set to warning, we can switch that to information to get more info
+about what happens when he hit an endpoint (run the app).
+We have two more methods on the startup class, the configureSevices refered as
+the depedency injection container which is used if we want to make a cclass or a sevice 
+available to other parts of our application we can add them inside this container
+and .net will take care of creation and destroying when not used of those sevices.
+The configure method is used to cinfigure the http reuqests, we check to see if we are in develpoent mode, idff we are 
+we use exceptions, we use httpRedirections, if we came on a hhtp adress we get redirected to
+the endpoint, we use routing to specify the url, authorization, and the middleware to use the endpoints and to map them/
+In the launchSetttings.json we can see the specifications while starting the app
