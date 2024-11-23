@@ -1,4 +1,9 @@
+using API.Extensions;
+using Application.Core;
+using Application.Products;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);  //  creates a Kestrel server. it's also going to read from our configuration files .json files,
@@ -8,13 +13,7 @@ var builder = WebApplication.CreateBuilder(args);  //  creates a Kestrel server.
 //  Services - things we can use inside our code,
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>(opt => // now we've got access to this particular method (AddDbContext) and we tell it about what class we're using (DataContext)
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")); //  we're going to specify that we want to use SQL lights, our database needs a connection string.
-});
-
+builder.Services.AddApplicationServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
