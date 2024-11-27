@@ -11,6 +11,7 @@ Microsoft.EntityFrameworkCore.Design ne API
 Microsoft.EntityFrameworkCore.SQLite ne Persistence
 MediatR by Jimmy Bogard on Application
 RefreshAutoMapper.Extensions.Microsoft.DependencyInjection by Jimmy Bogard o nApplication
+FluentVaalidation in application
 
 
 We use Entity Framework to stimulate the database

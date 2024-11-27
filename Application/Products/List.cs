@@ -1,3 +1,4 @@
+using Application.Core;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +9,9 @@ namespace Application.Products
 {
     public class List
     {
-        public class Query : IRequest<List<Product>> { }
+   public class Query : IRequest<Result<List<Product>>> { }
 
-        public class Handler : IRequestHandler<Query, List<Product>>
+       public class Handler : IRequestHandler<Query, Result<List<Product>>>
         {
             private readonly DataContext _context;
 
@@ -19,9 +20,9 @@ namespace Application.Products
                 _context = context;
             }
 
-            public async Task<List<Product>> Handle(Query request, CancellationToken token)
+             public async Task<Result<List<Product>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Products.ToListAsync();
+                return Result<List<Product>>.Success(await _context.Products.ToListAsync());
             }
         }
     }

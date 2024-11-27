@@ -1,3 +1,4 @@
+using Application.Core;
 using MediatR;
 using Persistence;
 
@@ -5,12 +6,12 @@ namespace Application.Products
 {
     public class Delete
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             public Guid Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
 
@@ -19,18 +20,25 @@ namespace Application.Products
                 _context = context;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+           public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var product = await _context.Products.FindAsync(request.Id);
 
                 _context.Remove(product);
 
-                await _context.SaveChangesAsync();
+               if (product == null) return null;
 
-                return Unit.Value;
+                _context.Remove(product);
+
+                await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to delete the activity");
+
+                return Result<Unit>.Success(Unit.Value);
             }
 
-            Task IRequestHandler<Command>.Handle(Command request, CancellationToken cancellationToken)
+            Task<Result<Unit>> IRequestHandler<Command, Result<Unit>>.Handle(Command request, CancellationToken cancellationToken)
             {
                 throw new NotImplementedException();
             }
