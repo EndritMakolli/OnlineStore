@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middleware;
 using Application.Core;
 using Application.Products;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +13,12 @@ var builder = WebApplication.CreateBuilder(args);  //  creates a Kestrel server.
 // Add services to the container.
 //  Services - things we can use inside our code,
 
+
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 // Middlewear things that can do something with the HTTP request on

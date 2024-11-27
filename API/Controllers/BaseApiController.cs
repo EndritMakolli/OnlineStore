@@ -1,17 +1,29 @@
+using Application.Core;
 using MediatR;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]  // Each controller has a route, so our API or our projects or application knows where to redirect this
-    public class BaseApiController : ControllerBase // every controller is going to derive from controller base.
+    [Route("api/[controller]")]
+    public class BaseApiController : ControllerBase
     {
         private IMediator _mediator;
 
-        protected IMediator Mediator => _mediator ??=
+        protected IMediator Mediator => _mediator ??= 
             HttpContext.RequestServices.GetService<IMediator>();
+
+        protected ActionResult HandleResult<T>(Result<T> result)
+        {
+            if (result == null) return NotFound();
+
+            if (result.IsSuccess && result.Value != null)
+                return Ok(result.Value);
+
+            if (result.IsSuccess && result.Value == null)
+                return NotFound();
+
+            return BadRequest(result.Error);
+        }
     }
 }
- // this means other controller will aready have the API attributes and root  when they inherit this  
