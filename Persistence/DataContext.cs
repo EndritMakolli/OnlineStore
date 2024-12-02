@@ -1,10 +1,11 @@
 
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Persistence
 {
-    public class DataContext : DbContext  // it represents a session with the database, can be used to query and save instances of our entities.
+    public class DataContext : IdentityDbContext<AppUser> // it represents a session with the database, can be used to query and save instances of our entities.
     // DB context is a combination of the units of work and repository patterns.
     {
         public DataContext(DbContextOptions options) : base(options)

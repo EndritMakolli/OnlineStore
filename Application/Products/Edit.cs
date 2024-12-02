@@ -1,6 +1,7 @@
 using Application.Core;
 using AutoMapper;
 using Domain;
+
 using FluentValidation;
 using MediatR;
 using Persistence;
@@ -9,6 +10,8 @@ namespace Application.Products
 {
     public class Edit
     {
+   
+
         public class Command : IRequest<Result<Unit>>
         {
             public Product Product { get; set; }
@@ -35,9 +38,10 @@ namespace Application.Products
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+                // Use 'Id' here to match the updated property name
                 var product = await _context.Products.FindAsync(request.Product.Id);
 
-                 if (product == null) return null;
+                if (product == null) return null;
 
                 _mapper.Map(request.Product, product);
 
@@ -47,6 +51,7 @@ namespace Application.Products
 
                 return Result<Unit>.Success(Unit.Value);
             }
+
 
         }
     }

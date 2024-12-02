@@ -5,6 +5,7 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace API.Controllers
@@ -23,7 +24,7 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new List.Query()));
         }
-
+   
         [HttpGet("{id}")] 
         public async Task<ActionResult<Product>> GetProduct(Guid id)
         {
