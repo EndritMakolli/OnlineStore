@@ -15,6 +15,10 @@ namespace Persistence
         public DbSet<Product> Products { get; set; } // DBsets these represent the tables that we're going to create.
         // we added this class at services in program.cs 
         public DbSet<Basket> Baskets { get; set; }
-        public DbSet<BasketItem> basketItems { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        
+        public DbSet<Address> Addresses { get; set; }
+
     }
 }
