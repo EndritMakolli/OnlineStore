@@ -2,6 +2,7 @@
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Domain.OrderAggregate;
 
 namespace Persistence
 {
@@ -17,8 +18,8 @@ namespace Persistence
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
-        
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
     }
 }

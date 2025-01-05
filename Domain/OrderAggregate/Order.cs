@@ -13,7 +13,7 @@ public class Order
     public List<OrderItem> OrderItems { get; set; }
     public long Subtotal { get; set; }
     public long DeliveryFee { get; set; }
-    public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
+    public OrderStatus Status { get; set; } // Using the enum here
 
     public long GetTotal()
     {
