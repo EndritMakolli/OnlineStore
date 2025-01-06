@@ -15,7 +15,7 @@ public class Order
     public long DeliveryFee { get; set; }
     public OrderStatus Status { get; set; } // Using the enum here
 
-    public long GetTotal()
+    public virtual long GetTotal()
     {
         return Subtotal + DeliveryFee;
     }
