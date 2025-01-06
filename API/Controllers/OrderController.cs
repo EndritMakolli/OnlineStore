@@ -93,7 +93,6 @@ public async Task<ActionResult<Order>> GetOrderById(int id)
             try
             {
                 _logger.LogInformation($"Attempting to delete order with ID {id}");
-                var order = await _context.Orders.FindAsync(id);
 
                 if (order == null)
                 {
