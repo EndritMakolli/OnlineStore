@@ -87,12 +87,13 @@ public async Task<ActionResult<Order>> GetOrderById(int id)
 }
 
         // Delete Order by ID
-        [HttpDelete("{id}")]
+       [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
             try
             {
                 _logger.LogInformation($"Attempting to delete order with ID {id}");
+                var order = await _context.Orders.FindAsync(id);
 
                 if (order == null)
                 {
