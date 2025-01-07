@@ -86,7 +86,8 @@ public async Task<ActionResult<Order>> GetOrderById(int id)
     }
 }
 
-        [HttpDelete("{id}")]
+        // Delete Order by ID
+       [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
             try
