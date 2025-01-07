@@ -4,9 +4,8 @@ namespace Domain
     using System.ComponentModel.DataAnnotations.Schema;
 
 
-    public class Product
+    public class Product : BaseEntity <Guid>
     {
-        public Guid Id { get; set; }  // Renamed to match standard convention
         public string Name { get; set; }
         public string Description { get; set; }
         public long Price { get; set; }

@@ -2,9 +2,8 @@ using Domain;
 
 namespace Domain;
 
-public class Basket
+public class Basket : BaseEntity <int>
 {
-    public int Id { get; set; }
     public string BuyerId { get; set; }
     public List<BasketItem> Items { get; set; } = new List<BasketItem>();
     public string PaymentIntentId { get; set; }

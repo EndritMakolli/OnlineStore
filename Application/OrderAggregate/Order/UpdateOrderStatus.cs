@@ -26,7 +26,7 @@ namespace Application.OrderAggregate.Order
             }
 
             // Update the order's status
-            order.Status = (Domain.OrderAggregate.OrderStatus)newStatus;
+            order.Status = (Domain.Enums.OrderStatus)newStatus;
 
             // Save the changes
             await _context.SaveChangesAsync();
