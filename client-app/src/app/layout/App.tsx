@@ -4,7 +4,7 @@ import { Container } from 'semantic-ui-react';
 import { Product } from '../models/product';
 import NavBar from './NavBar';
 import ProductDashboard from '../../features/products/dashboard/ProductDashboard';
-import { v4 as uuid } from 'uuid';
+
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);

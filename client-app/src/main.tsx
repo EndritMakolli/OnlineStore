@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import 'semantic-ui-css/semantic.min.css'
-import './app/layout/styles.css';
 import App from './app/layout/App';
 
+console.log('Initializing React'); // Debug log to ensure main.tsx is running
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
-root.render(
-  <App/>
-);
+
+console.log('ReactDOM.createRoot executed');
