@@ -1,12 +1,14 @@
-
 using Application.Products;
 using Application.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using Microsoft.Extensions.DependencyInjection;
+using Application.Interfaces;
 using FluentValidation.AspNetCore;
 using FluentValidation;
+using API.Services;
+using Application.OrderAggregate;
+
 
 namespace API.Extensions
 {
@@ -33,8 +35,15 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
+
+            // Add AdvancedOrderProcessor and related services
+            
+            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<AdvancedOrderProcessor>();
+            services.AddScoped<IInventoryService, InventoryService>();
+
             return services;
         }
     }
 }
-
